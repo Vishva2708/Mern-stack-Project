@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products</title>
+</head>
+<body>
+
+  <h2>Add Product</h2>
+
+  <!-- ADD PRODUCT FORM -->
+  <form action="/products/product" method="post" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Title" required><br><br>
+    <input type="text" name="category" placeholder="Category" required><br><br>
+    <input type="text" name="price" placeholder="Price" required><br><br>
+    <input type="file" name="image"><br><br>
+    <button type="submit">Add</button>
+  </form>
+
+  <hr>
+
+  <h2>Product List</h2>
+
+  <table border="1" cellpadding="10">
+    <tr>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Delete</th>
+    </tr>
+
+    <% data.forEach(p => { %>
+      <tr>
+        <td>
+          <% if(p.image){ %>
+            <img src="/<%= p.image %>" width="60">
+          <% } %>
+        </td>
+        <td><%= p.title %></td>
+        <td><%= p.category %></td>
+        <td><%= p.price %></td>
+        <td>
+          <a href="/products/delete/<%= p._id %>">Delete</a>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+
+</body>
+</html>

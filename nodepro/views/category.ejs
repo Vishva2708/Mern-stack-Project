@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+</head>
+<body>
+
+    <h1>Add Category</h1>
+
+    <form
+    action="/categories/add"
+    method="post"
+    enctype="multipart/form-data"
+    >
+
+        <input type="text" name="category" placeholder="Category">
+
+        <input type="text" name="brand" placeholder="Brand">
+
+        <input type="text" name="title" placeholder="Title">
+
+        <input type="text" name="price" placeholder="Price">
+
+        <input type="file" name="image">
+
+        <input type="submit">
+
+    </form>
+
+    <hr>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+
+        <% data.map((el,i)=>{ %>
+
+            <tr>
+
+                <td><%= el.category %></td>
+
+                <td><%= el.brand %></td>
+
+                <td><%= el.title %></td>
+
+                <td><%= el.price %></td>
+
+                <td>
+                    <img
+                    src="/upload/<%= el.image %>"
+                    width="80"
+                    >
+                </td>
+
+                <td>
+                    <a href="/categories/delete/<%= el._id %>">
+                        Delete
+                    </a>
+                </td>
+
+                <td>
+                    <a href="/categories/edit/<%= el._id %>">
+                        Edit
+                    </a>
+                </td>
+
+            </tr>
+
+        <% }) %>
+
+    </table>
+
+</body>
+</html>

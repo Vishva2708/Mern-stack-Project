@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/collections/collect" method="post" enctype="multipart/form-data">
+        <input type="text" name="category" placeholder="Enter category">
+        <input type="text" name="brand" placeholder="Enter Brand">
+        <input type="text" name="title" placeholder="Enter title">
+        <input type="text" name="price" placeholder="Enter price">
+        <input type="text" name="discription" placeholder="Enter Discription">
+        <input type="file" name="image">
+        <input type="submit">
+    </form>
+
+    <table border="1">
+        <tr>
+            <th>Category:</th>
+            <th>Brand:</th>
+            <th>Title:</th>
+            <th>Price:</th>
+            <th>Description:</th>
+            <th>Image:</th>
+            <th>Delete:</th>
+            <th>Edit:</th>
+        </tr>
+        
+        <% data.map((el,i)=>{%>
+            <tr>
+                <td><%=el.category%></td>
+                <td><%=el.brand%></td>
+                <td><%=el.title%></td>
+                <td><%=el.price%></td>
+                <td><%=el.description%></td>
+                <td>
+             <img src="/upload/<%= el.image %>" width="70">
+                </td>
+                <td><a href="/collections/delete/<%= el._id %>">Delete</a></td>
+                <td><a href="/collections/edit/<%= el._id %>">Edit</a></td>
+            </tr>
+        <%})%>
+    </table>
+</body>
+</html>
