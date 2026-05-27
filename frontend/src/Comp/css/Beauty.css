@@ -1,0 +1,19 @@
+.beauty-img{
+      height: 220px;  
+    overflow: hidden;
+  border-radius: 8px;
+}
+.beauty-row {
+  overflow-x: auto;  
+}
+
+.beauty-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  
+  transition: 0.3s ease;
+}
+
+.beauty-img:hover img {
+  transform: scale(1.1);
+}

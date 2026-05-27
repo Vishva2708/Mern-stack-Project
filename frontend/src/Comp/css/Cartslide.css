@@ -1,0 +1,102 @@
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+   z-index: 1000;
+}
+
+.cart-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar */
+.cart-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 380px;
+  height: 100%;
+  background: #fff;
+  transform: translateX(100%);
+  transition: 0.3s ease-in-out;
+   z-index: 1001;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-sidebar.open {
+  transform: translateX(0);
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+/* item */
+.cart-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.cart-info {
+  flex: 1;
+}
+.navbar {
+  position: relative;
+  z-index: 1100;
+}
+/* footer */
+.cart-footer {
+  margin-top: auto;
+}
+.cart-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.view-btn,
+.checkout-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* View Cart button */
+.view-btn {
+  background: #111;
+  color: white;
+}
+
+/* Checkout button */
+.checkout-btn {
+  background: #28a745;
+  color: white;
+}
+
+/* hover effect */
+.view-btn:hover {
+  opacity: 0.9;
+}
+
+.checkout-btn:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,21 @@
+.custom-table th {
+  width: 30%;
+  background: #f8f9fa;
+  font-weight: 600;
+  padding: 15px;
+}
+
+.custom-table td {
+  padding: 15px;
+  color: #555;
+}
+.product-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 1px;
+   font-family: 'Poppins', sans-serif;
+}
+.custom-table tr:hover {
+  background-color: #f1f1f1;
+  transition: 0.3s;
+}

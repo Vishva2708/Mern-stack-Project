@@ -1,0 +1,23 @@
+.wishlist-container h2 {
+  font-weight: 600;
+}
+
+.qty-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.qty-box button {
+  border: none;
+  background: none;
+  padding: 5px 12px;
+  font-size: 18px;
+}
+
+.qty-box span {
+  padding: 0 10px;
+}
