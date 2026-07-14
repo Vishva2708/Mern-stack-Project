@@ -7,7 +7,6 @@ const Collection = () => {
   const [text, setText] = useState([]);
   const [active, setActive] = useState("All");
   const [product, setProduct] = useState(null);
-  const [searchText, setSearchText] = useState("");
   const [qty, setQty] = useState(1);
   const navigate = useNavigate();
   const { addToCart, setCartOpen, addToWishlist } = useContext(CartContext);

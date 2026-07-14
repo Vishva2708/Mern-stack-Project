@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router";
@@ -11,29 +11,23 @@ const Category = () => {
   const [price, setPrice] = useState(1000);
   const [instock, setInstock] = useState(false);
   const [onsale, setOnsale] = useState(false);
-  const [status,setStatus]=useState(false)
 
   const navigate = useNavigate();
 
-  const handlecart = () => {
-    navigate("/cart");
-  };
-  useEffect(() => {
-    getproducts();
+  const getproducts = useCallback(async () => {
+    const res = await axios.get("http://localhost:4500/collections/api");
+    setProducts(res.data || []);
   }, []);
 
-  const getproducts = async () => {
-    const res = await axios.get(
-      "http://localhost:4500/collections/api",
-      products,
-    );
-    setProducts(res.data || []);
-  };
+  useEffect(() => {
+    getproducts();
+  }, [getproducts]);
+
   const categories = ["All", ...new Set(products.map((i) => i.category))];
 
   const filteredproducts = products.filter((itm) => {
     const categorymatch =
-      selectedcategory === "All" ? true : itm.category == selectedcategory;
+      selectedcategory === "All" ? true : itm.category === selectedcategory;
 
     const priceMatch = Number(itm.price) <= price;
 

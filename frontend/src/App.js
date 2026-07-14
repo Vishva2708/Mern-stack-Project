@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Nav from "./Comp/Nav";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Register from "./Comp/Register";
 import Login from "./Comp/Login";
 import Home from "./Comp/Home";
@@ -32,12 +32,6 @@ import Coupon from "./Comp/Coupon";
 const App = () => {
   const [showCart, setShowCart] = useState(false);
 
-  let user = null;
-  try {
-    user = JSON.parse(localStorage.getItem("user"));
-  } catch (e) {
-    user = null;
-  }
   const isAdminRoute = window.location.pathname.startsWith("/admin");
   return (
     <div>

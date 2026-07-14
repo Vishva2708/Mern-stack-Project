@@ -55,6 +55,7 @@ const Cart = () => {
                   <img
                     src={`http://localhost:4500/upload/${item.image}`}
                     className="cart-img"
+                    alt={item.title}
                   />
                   <span>{item.title}</span>
                 </div>

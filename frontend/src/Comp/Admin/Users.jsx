@@ -12,7 +12,7 @@ const Users = () => {
   };
   const changeStatus = async (id, status) => {
     await axios.put(`http://localhost:4500/userdata/users/${id}`, {
-      status: status == "active" ? "inactive" : "active",
+      status: status === "active" ? "inactive" : "active",
     });
     getUsers();
   };

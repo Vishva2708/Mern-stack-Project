@@ -13,10 +13,7 @@ const Register = () => {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:4500/userdata/signup",
-        form,
-      );
+      await axios.post("http://localhost:4500/userdata/signup", form);
       alert("Signup Successfully");
       navigate("/login");
     } catch (error) {

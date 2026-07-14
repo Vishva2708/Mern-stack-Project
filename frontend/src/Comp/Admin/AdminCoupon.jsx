@@ -18,7 +18,7 @@ const AdminCoupon = () => {
   },[])
   const handlesubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:4500/coupon/add", {
+    await axios.post("http://localhost:4500/coupon/add", {
       code:form.code.toUpperCase(),
       brand:form.brand,
       discount:form.discount,

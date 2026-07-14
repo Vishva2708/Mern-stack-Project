@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router-dom";
 const Nav = () => {
-  const { setCartOpen, cartItems,logoutUser, addToWishlist, wishlistItems } =
-    useContext(CartContext);
+  const { setCartOpen, cartItems, wishlistItems } = useContext(CartContext);
   const [searchText, setSearchText] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 
@@ -62,7 +61,7 @@ const Nav = () => {
     navigate("/login");
   }
 
-}, []);
+}, [navigate]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 fixed-top">
@@ -97,13 +96,15 @@ const Nav = () => {
             </li>
 
             <li className="nav-item dropdown position-static">
-              <a
+              <button
                 className="nav-link dropdown-toggle fw-medium"
-                href="#"
+                type="button"
                 data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style={{ background: "none", border: 0 }}
               >
                 Products
-              </a>
+              </button>
 
               <div className="dropdown-menu w-100 mt-3 border-0 shadow">
                 <div className="container">
