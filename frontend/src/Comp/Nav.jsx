@@ -55,15 +55,6 @@ const Nav = () => {
     localStorage.removeItem("userToken")
     navigate("/login");
   };
-  useEffect(() => {
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    navigate("/login");
-  }
-
-}, [navigate]);
-
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 fixed-top">
       <div className="container">

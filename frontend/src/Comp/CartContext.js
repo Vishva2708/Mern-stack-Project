@@ -209,7 +209,7 @@ export const CartProvider = ({ children }) => {
 
     localStorage.removeItem("user");
 
-    localStorage.removeItem("token");
+    localStorage.removeItem("userToken");
   };
 
   return (
