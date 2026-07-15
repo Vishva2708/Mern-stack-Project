@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
@@ -19,7 +20,7 @@ const AdminOrders = () => {
 
   const getOrders = async () => {
     const res = await axios.get(
-      "http://localhost:4500/orders"
+      `${API_URL}/orders`
     );
 
     setOrders(res.data);
@@ -27,7 +28,7 @@ const AdminOrders = () => {
 
   const getSummary = async () => {
     const res = await axios.get(
-      "http://localhost:4500/orders/summary"
+      `${API_URL}/orders/summary`
     );
 
     setSummary(res.data);

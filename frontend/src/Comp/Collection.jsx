@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useContext, useEffect, useState } from "react";
 import "./css/Collection.css";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +13,7 @@ const Collection = () => {
   const { addToCart, setCartOpen, addToWishlist } = useContext(CartContext);
 
   useEffect(() => {
-    fetch("http://localhost:4500/collections/api")
+    fetch(`${API_URL}/collections/api`)
       .then((res) => res.json())
       .then((data) => setText(data))
       .catch((err) => console.log(err));
@@ -60,7 +61,7 @@ const Collection = () => {
               <div className="product-card" key={item._id}>
                 <div className="img-wrapper">
                   <img
-                    src={`http://localhost:4500/upload/${item.image}`}
+                    src={`${API_URL}/upload/${item.image}`}
                     alt={item.title}
                     onClick={() => navigate(`/product/${item._id}`)}
                   />
@@ -122,7 +123,7 @@ const Collection = () => {
                 <div className="row">
                   <div className="col-md-6 text-center model-left">
                     <img
-                      src={`http://localhost:4500/upload/${product.image}`}
+                      src={`${API_URL}/upload/${product.image}`}
                       alt={product.title}
                       className="modal-img"
                     />

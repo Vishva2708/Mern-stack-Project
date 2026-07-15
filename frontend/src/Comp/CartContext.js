@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 
@@ -22,7 +23,7 @@ export const CartProvider = ({ children }) => {
 
         if (!user?._id) return;
 
-        const res = await axios.get(`http://localhost:4500/cart/${user._id}`);
+        const res = await axios.get(`${API_URL}/cart/${user._id}`);
         const formattedCart =
           res.data?.products?.map((item) => ({
             ...item.productId,
@@ -47,7 +48,7 @@ export const CartProvider = ({ children }) => {
         }
         if (!user?._id) return;
         const res = await axios.get(
-          `http://localhost:4500/wishlist/${user._id}`,
+          `${API_URL}/wishlist/${user._id}`,
         );
 
         const formattedWishlist =
@@ -71,12 +72,12 @@ export const CartProvider = ({ children }) => {
         return;
       }
 
-      await axios.post("http://localhost:4500/cart/add-cart", {
+      await axios.post(`${API_URL}/cart/add-cart`, {
         userId: user._id,
         productId: product._id,
       });
 
-      const res = await axios.get(`http://localhost:4500/cart/${user._id}`);
+      const res = await axios.get(`${API_URL}/cart/${user._id}`);
 
       const formattedCart =
         res.data?.products?.map((item) => ({
@@ -94,12 +95,12 @@ export const CartProvider = ({ children }) => {
 
   const removecart = async (id) => {
     try {
-      await axios.post("http://localhost:4500/cart/remove-cart", {
+      await axios.post(`${API_URL}/cart/remove-cart`, {
         userId: user._id,
         productId: id,
       });
 
-      const res = await axios.get(`http://localhost:4500/cart/${user._id}`);
+      const res = await axios.get(`${API_URL}/cart/${user._id}`);
 
       const formattedCart =
         res.data?.products?.map((item) => ({
@@ -115,12 +116,12 @@ export const CartProvider = ({ children }) => {
 
   const increaseQty = async (id) => {
     try {
-      await axios.post("http://localhost:4500/cart/increase-qty", {
+      await axios.post(`${API_URL}/cart/increase-qty`, {
         userId: user._id,
         productId: id,
       });
 
-      const res = await axios.get(`http://localhost:4500/cart/${user._id}`);
+      const res = await axios.get(`${API_URL}/cart/${user._id}`);
 
       const formattedCart =
         res.data?.products?.map((item) => ({
@@ -136,12 +137,12 @@ export const CartProvider = ({ children }) => {
 
   const decreaseQty = async (id) => {
     try {
-      await axios.post("http://localhost:4500/cart/decrease-qty", {
+      await axios.post(`${API_URL}/cart/decrease-qty`, {
         userId: user._id,
         productId: id,
       });
 
-      const res = await axios.get(`http://localhost:4500/cart/${user._id}`);
+      const res = await axios.get(`${API_URL}/cart/${user._id}`);
 
       const formattedCart =
         res.data?.products?.map((item) => ({
@@ -162,12 +163,12 @@ export const CartProvider = ({ children }) => {
         return;
       }
 
-      await axios.post("http://localhost:4500/wishlist/add-wishlist", {
+      await axios.post(`${API_URL}/wishlist/add-wishlist`, {
         userId: user._id,
         productId: product._id,
       });
 
-      const res = await axios.get(`http://localhost:4500/wishlist/${user._id}`);
+      const res = await axios.get(`${API_URL}/wishlist/${user._id}`);
 
       const formattedWishlist =
         res.data?.products?.map((item) => ({
@@ -184,12 +185,12 @@ export const CartProvider = ({ children }) => {
 
   const removewishlist = async (id) => {
     try {
-      await axios.post("http://localhost:4500/wishlist/remove-wishlist", {
+      await axios.post(`${API_URL}/wishlist/remove-wishlist`, {
         userId: user._id,
         productId: id,
       });
 
-      const res = await axios.get(`http://localhost:4500/wishlist/${user._id}`);
+      const res = await axios.get(`${API_URL}/wishlist/${user._id}`);
 
       const formattedWishlist =
         res.data?.products?.map((item) => ({

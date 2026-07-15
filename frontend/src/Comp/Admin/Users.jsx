@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -7,11 +8,11 @@ const Users = () => {
     getUsers();
   }, []);
   const getUsers = async () => {
-    const res = await axios.get("http://localhost:4500/userdata/users");
+    const res = await axios.get(`${API_URL}/userdata/users`);
     setUsers(res.data);
   };
   const changeStatus = async (id, status) => {
-    await axios.put(`http://localhost:4500/userdata/users/${id}`, {
+    await axios.put(`${API_URL}/userdata/users/${id}`, {
       status: status === "active" ? "inactive" : "active",
     });
     getUsers();

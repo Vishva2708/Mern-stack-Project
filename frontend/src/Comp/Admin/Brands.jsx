@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Badge } from "react-bootstrap";
@@ -13,7 +14,7 @@ const Brands = () => {
 
   const getProducts = async () => {
     const res = await axios.get(
-      "http://localhost:4500/collections/api"
+      `${API_URL}/collections/api`
     );
 
     setProducts(res.data);
@@ -118,7 +119,7 @@ const Brands = () => {
               >
                 <Card.Img
                   variant="top"
-                  src={`http://localhost:4500/upload/${item.image}`}
+                  src={`${API_URL}/upload/${item.image}`}
                   style={{
                     height: "230px",
                     objectFit: "cover",

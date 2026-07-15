@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,7 +14,7 @@ const Register = () => {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4500/userdata/signup", form);
+      await axios.post(`${API_URL}/userdata/signup`, form);
       alert("Signup Successfully");
       navigate("/login");
     } catch (error) {

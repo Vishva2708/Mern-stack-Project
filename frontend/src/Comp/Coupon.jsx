@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -5,7 +6,7 @@ const Coupon = () => {
   const [coupons, setCoupons] = useState([]);
 
   const getCoupons=async()=>{
-    const res=await axios.get("http://localhost:4500/coupon")
+    const res=await axios.get(`${API_URL}/coupon`)
     setCoupons(res.data.coupons)
   }
   useEffect(()=>{

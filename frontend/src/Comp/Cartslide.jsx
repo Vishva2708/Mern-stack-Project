@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useContext } from "react";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +35,7 @@ const Cartslide = () => {
           cartItems.map((item) => (
             <div key={item._id} className="cart-item">
               <img
-                src={`http://localhost:4500/upload/${item.image}`}
+                src={`${API_URL}/upload/${item.image}`}
                 alt=""
               />
               <div className="cart-info">

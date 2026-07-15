@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +20,7 @@ const Cart = () => {
   const total = subtotal - discountAmount;
 
   const applycoupon=async()=>{
-    const res=await axios.post("http://localhost:4500/coupon/apply",{code:coupon,
+    const res=await axios.post(`${API_URL}/coupon/apply`,{code:coupon,
       cartItems:cartItems})
       if(!res.data.success){
         setMessage(res.data.message)
@@ -53,7 +54,7 @@ const Cart = () => {
               >
                 <div className="d-flex align-items-center gap-3 w-50">
                   <img
-                    src={`http://localhost:4500/upload/${item.image}`}
+                    src={`${API_URL}/upload/${item.image}`}
                     className="cart-img"
                     alt={item.title}
                   />

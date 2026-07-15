@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "./CartContext";
@@ -28,7 +29,7 @@ const Wishlist = () => {
           
           <div className="col-md-5 d-flex align-items-center gap-3">
             <img
-              src={`http://localhost:4500/upload/${item.image}`}
+              src={`${API_URL}/upload/${item.image}`}
               alt=""
               width="80"
             />

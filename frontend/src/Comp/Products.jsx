@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -5,7 +6,7 @@ const Products = () => {
  const [state,setState] = useState([])
  const navigate=useNavigate()
  useEffect(() => {
-  fetch("http://localhost:4500/products/api")
+  fetch(`${API_URL}/products/api`)
     .then((res) => res.json())
     .then((data) => setState(data))
     .catch((err) => console.log(err));
@@ -34,7 +35,7 @@ const Products = () => {
             <div className="col-lg-3">
               <div class="card border-0 position-relative">
                 <img
-                 src={`http://localhost:4500/${el.image}`}
+                 src={`${API_URL}/upload/${el.image}`}
                   className="img-fluid"
                   alt={el.title}
                   style={{ height: "500px", width: "100%", objectFit: "cover" }}

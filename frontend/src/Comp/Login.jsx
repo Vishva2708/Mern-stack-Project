@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import axios from "axios";
 
 import React, { useState } from "react";
@@ -25,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:4500/userdata/login",
+        `${API_URL}/userdata/login`,
         form,
       );
 

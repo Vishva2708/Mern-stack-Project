@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ const Productinfo = () => {
   const [active, setActive] = useState("description");
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:4500/collections/api/${id}`)
+    fetch(`${API_URL}/collections/api/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [id]);
@@ -24,7 +25,7 @@ const Productinfo = () => {
       <div className="row">
         <div className="col-md-6 text-center model-left">
           <img
-            src={`http://localhost:4500/upload/${product.image}`}
+            src={`${API_URL}/upload/${product.image}`}
             alt={product.title}
             className="modal-img"
           />

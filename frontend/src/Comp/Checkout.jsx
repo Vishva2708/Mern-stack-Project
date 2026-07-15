@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router-dom";
@@ -92,7 +93,7 @@ const Checkout = () => {
 
     try {
       await axios.post(
-        "http://localhost:4500/orders/create",
+        `${API_URL}/orders/create`,
         orderData
       );
 

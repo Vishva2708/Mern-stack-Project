@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import React, { useState } from "react";
 import axios from "axios";
 const AdminSlider = () => {
@@ -11,7 +12,7 @@ const AdminSlider = () => {
   };
   const handlesubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:4500/slider/add", form);
+    await axios.post(`${API_URL}/slider/add`, form);
     alert("Slider Added");
 
     setForm({

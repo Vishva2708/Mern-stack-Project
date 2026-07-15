@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -11,7 +12,7 @@ const Slider = () => {
   }, []);
 
   const getslider = async () => {
-    const res = await axios.get("http://localhost:4500/slider");
+    const res = await axios.get(`${API_URL}/slider`);
     setSlider(res.data.sliders || []);
   };
   const handlesubmit=async()=>{

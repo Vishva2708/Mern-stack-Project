@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal, Table } from "react-bootstrap";
@@ -18,7 +19,7 @@ const Products = () => {
   });
 
   const getProducts = async () => {
-    const res = await axios.get("http://localhost:4500/collections/api");
+    const res = await axios.get(`${API_URL}/collections/api`);
 
     setProducts(res.data);
   };
@@ -73,13 +74,13 @@ const Products = () => {
 
     if (edit) {
       await axios.put(
-        `http://localhost:4500/collections/update/${edit}`,
+        `${API_URL}/collections/update/${edit}`,
         formData,
       );
 
       alert("Product Updated");
     } else {
-      await axios.post("http://localhost:4500/collections/collect", formData);
+      await axios.post(`${API_URL}/collections/collect`, formData);
 
       alert("Product Added");
     }
@@ -88,7 +89,7 @@ const Products = () => {
   };
 
   const deleteProduct = async (id) => {
-    await axios.delete(`http://localhost:4500/collections/delete/${id}`);
+    await axios.delete(`${API_URL}/collections/delete/${id}`);
 
     alert("Product Deleted");
 
@@ -184,7 +185,7 @@ const Products = () => {
                 <tr key={itm._id}>
                   <td>
                     <img
-                      src={`http://localhost:4500/upload/${itm.image}`}
+                      src={`${API_URL}/upload/${itm.image}`}
                       alt=""
                       className="img-fluid"
                       style={{

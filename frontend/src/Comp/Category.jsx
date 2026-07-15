@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { CartContext } from "./CartContext";
@@ -15,7 +16,7 @@ const Category = () => {
   const navigate = useNavigate();
 
   const getproducts = useCallback(async () => {
-    const res = await axios.get("http://localhost:4500/collections/api");
+    const res = await axios.get(`${API_URL}/collections/api`);
     setProducts(res.data || []);
   }, []);
 
@@ -189,7 +190,7 @@ const Category = () => {
                       }}
                     >
                       <img
-                        src={`http://localhost:4500/upload/${itm.image}`}
+                        src={`${API_URL}/upload/${itm.image}`}
                         alt=""
                         className="w-100 h-100"
                         style={{

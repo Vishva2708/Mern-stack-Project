@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +13,7 @@ const Categories = () => {
   }, []);
 
   const getProducts = async () => {
-    const res = await axios.get("http://localhost:4500/collections/api");
+    const res = await axios.get(`${API_URL}/collections/api`);
 
     setProducts(res.data);
   };
@@ -80,7 +81,7 @@ const Categories = () => {
                   }}
                 >
                   <img
-                    src={`http://localhost:4500/upload/${categoryImage}`}
+                    src={`${API_URL}/upload/${categoryImage}`}
                     alt=""
                     style={{
                       width: "100%",

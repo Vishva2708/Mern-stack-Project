@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
 const AdminCoupon = () => {
@@ -10,7 +11,7 @@ const AdminCoupon = () => {
   const [coupons,setCoupons]=useState([])
 
   const getCoupons =async()=>{
-    const res=await axios.get("http://localhost:4500/coupon")
+    const res=await axios.get(`${API_URL}/coupon`)
     setCoupons(res.data.coupons)
   }
   useEffect(()=>{
@@ -18,7 +19,7 @@ const AdminCoupon = () => {
   },[])
   const handlesubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:4500/coupon/add", {
+    await axios.post(`${API_URL}/coupon/add`, {
       code:form.code.toUpperCase(),
       brand:form.brand,
       discount:form.discount,

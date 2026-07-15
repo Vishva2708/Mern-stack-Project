@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -24,7 +25,7 @@ const Nav = () => {
     }
 
     const fetchData = async () => {
-      const res = await axios.get("http://localhost:4500/collections/api");
+      const res = await axios.get(`${API_URL}/collections/api`);
       const data = res.data || [];
 
       const filtered = data
@@ -261,7 +262,7 @@ const Nav = () => {
                       onClick={() => setSearchText("")}
                     >
                       <img
-                        src={`http://localhost:4500/${item.image}`}
+                        src={`${API_URL}/upload/${item.image}`}
                         width="40"
                         height="40"
                         alt=""
