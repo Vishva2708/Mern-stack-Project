@@ -1,3 +1,14 @@
+.discover-products-header {
+  align-items: center;
+  gap: 20px;
+}
+
+.discover-product-img {
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+}
+
 .customer-review-section {
   padding: 70px 0 55px;
   background: #fff;
@@ -142,6 +153,15 @@
 }
 
 @media (max-width: 991px) {
+  .discover-products-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .discover-product-img {
+    height: 420px;
+  }
+
   .service-strip {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -156,6 +176,30 @@
 }
 
 @media (max-width: 575px) {
+  .discover-products {
+    padding: 14px !important;
+  }
+
+  .discover-products .row {
+    padding: 8px !important;
+  }
+
+  .discover-products h1 {
+    font-size: 30px;
+  }
+
+  .discover-products-header .btn {
+    width: 100%;
+  }
+
+  .discover-product-img {
+    height: 360px;
+  }
+
+  .discover-products .card h4 {
+    font-size: 18px;
+  }
+
   .review-heading h2 {
     font-size: 30px;
   }

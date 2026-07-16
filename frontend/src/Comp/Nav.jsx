@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router-dom";
+import "./css/Nav.css";
 const Nav = () => {
   const { setCartOpen, cartItems, wishlistItems } = useContext(CartContext);
   const [searchText, setSearchText] = useState("");
@@ -56,7 +57,7 @@ const Nav = () => {
     navigate("/login");
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 fixed-top">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
       <div className="container">
         {/* Logo */}
         <Link className="navbar-brand" to="/">

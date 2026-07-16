@@ -14,10 +14,6 @@
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0,0,0,0.08);
 }
-body {
-  padding-top: 90px;
-}
-
 .navbar {
   z-index: 1000;
 }
@@ -25,8 +21,4 @@ body {
 .nav-icons i:hover {
   color: #ff6a00;
   transition: 0.3s;
-}
-
-body {
-  padding-top: 80px;
 }

@@ -20,7 +20,7 @@ const Productinfo = () => {
     return <h2>Loading...</h2>;
   }
   return (
-    <div className="container mt-5 p-3">
+    <div className="container mt-5 p-3 product-info-page">
       <h2 className="product-title">Product Info</h2>
       <div className="row">
         <div className="col-md-6 text-center model-left">

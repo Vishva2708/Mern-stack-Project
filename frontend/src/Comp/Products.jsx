@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import "./css/Products.css";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -35,9 +36,9 @@ const Products = () => {
   };
 
   return (
-    <div className="container mt-5 p-4">
+    <div className="container mt-5 p-4 discover-products">
       <div className="row p-4 g-4">
-        <div className="d-flex justify-content-between">
+        <div className="discover-products-header d-flex justify-content-between">
           <div>
             <h5 style={{ color: "#BD844C" }}>Product Collection</h5>
             <h1>Discover our products</h1>
@@ -58,9 +59,8 @@ const Products = () => {
             <div className="card border-0 position-relative">
               <img
                 src={el.image}
-                className="img-fluid"
                 alt={el.title}
-                style={{ height: "500px", width: "100%", objectFit: "cover" }}
+                className="img-fluid discover-product-img"
               />
 
               <div
