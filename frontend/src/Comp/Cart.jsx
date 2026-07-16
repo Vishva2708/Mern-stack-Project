@@ -19,19 +19,21 @@ const Cart = () => {
   );
   const total = subtotal - discountAmount;
 
-  const applycoupon=async()=>{
-    const res=await axios.post(`${API_URL}/coupon/apply`,{code:coupon,
-      cartItems:cartItems})
-      if(!res.data.success){
-        setMessage(res.data.message)
-        setDiscountAmount(0)
-        setDiscountpercent(0)
-        return
-      }
-      setDiscountAmount(res.data.discountAmount)
-      setDiscountpercent(res.data.discountpercent)
+  const applycoupon = async () => {
+    const res = await axios.post(`${API_URL}/coupon/apply`, {
+      code: coupon,
+      cartItems: cartItems,
+    });
+    if (!res.data.success) {
       setMessage(res.data.message);
-  }
+      setDiscountAmount(0);
+      setDiscountpercent(0);
+      return;
+    }
+    setDiscountAmount(res.data.discountAmount);
+    setDiscountpercent(res.data.discountpercent);
+    setMessage(res.data.message);
+  };
 
   return (
     <div className="container mt-5 pt-5">

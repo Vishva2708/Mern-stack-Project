@@ -5,7 +5,6 @@ import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router";
 const Category = () => {
   const { addToCart } = useContext(CartContext);
-
   const [products, setProducts] = useState([]);
   const [selectedcategory, setSelectedcategory] = useState("All");
   const [sortorder, setSortorder] = useState("default");

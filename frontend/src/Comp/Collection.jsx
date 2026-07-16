@@ -1,6 +1,7 @@
 import { API_URL } from "../config";
 import React, { useContext, useEffect, useState } from "react";
 import "./css/Collection.css";
+import "./css/Products.css";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "./CartContext";
 
@@ -23,42 +24,90 @@ const Collection = () => {
     active === "All"
       ? text
       : text.filter(
-          (item) =>
-            item.brand && item.brand.toLowerCase() === active.toLowerCase(),
+          (item) => {
+            const category = item.category ? item.category.toLowerCase() : "";
+            const brand = item.brand ? item.brand.toLowerCase() : "";
+            const status = item.status ? item.status.toLowerCase() : "";
+            const selected = active.toLowerCase();
+
+            return (
+              category === selected ||
+              brand === selected ||
+              status === selected
+            );
+          },
         );
+
+  const reviews = [
+    {
+      id: "review-1",
+      name: "Jake Weary",
+      role: "CEO Founder",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      rating: 4,
+    },
+    {
+      id: "review-2",
+      name: "Salim Rana",
+      role: "Web Developer",
+      image: "https://randomuser.me/api/portraits/men/75.jpg",
+      rating: 4,
+    },
+  ];
+
+  const services = [
+    {
+      id: "service-1",
+      icon: "fa-solid fa-truck",
+      title: "Free Delivery",
+      text: "Orders from all item",
+    },
+    {
+      id: "service-2",
+      icon: "fa-solid fa-dollar-sign",
+      title: "Return & Refund",
+      text: "Money back guarantee",
+    },
+    {
+      id: "service-3",
+      icon: "fa-solid fa-percent",
+      title: "Member Discount",
+      text: "On every order over $140.00",
+    },
+    {
+      id: "service-4",
+      icon: "fa-solid fa-headphones",
+      title: "Support 24/7",
+      text: "Contact us 24 hours a day",
+    },
+  ];
 
   return (
     <div className=" container collection-container">
       <div className="top-bar">
         <div className="main-title">
-          <h5 style={{ color: "#e67e22" }}>Best Seller This Week's</h5>
+          <h5>Best Seller This Week's</h5>
           <h2>Enjoy The Best Quality</h2>
         </div>
-       <div className="categories d-flex flex-wrap justify-content-center gap-2">
-  {["All", "Trending", "Beauty", "Cosmetics", "Electronics"].map(
-    (cat) => (
-      <span
-        key={cat}
-        className={`px-3 py-2 text-center ${
-          active === cat ? "active" : ""
-        }`}
-        style={{
-          width: "45%",
-          cursor: "pointer",
-        }}
-        onClick={() => setActive(cat)}
-      >
-        {cat}
-      </span>
-    ),
-  )}
-</div>
+        <div className="categories">
+          {["All", "Beauty", "Cosmetics", "Electronics"].map(
+            (cat) => (
+              <button
+                key={cat}
+                className={active === cat ? "active" : ""}
+                onClick={() => setActive(cat)}
+              >
+                {cat}
+              </button>
+            ),
+          )}
+        </div>
       </div>
       <div className="container">
-        <div className="row">
+        <div className="row g-4">
           {filteredproduct.map((item) => (
-            <div className="col-lg-3 col-md-12 mb-5">
-              <div className="product-card" key={item._id}>
+            <div className="col-lg-3 col-md-6" key={item._id}>
+              <div className="product-card">
                 <div className="img-wrapper">
                   <img
                     src={`${API_URL}/upload/${item.image}`}
@@ -103,13 +152,25 @@ const Collection = () => {
                     Add To Cart
                   </button>
                 </div>
+                <div className="product-details">
+                  <p>{item.category}</p>
+                  <h4>{item.title}</h4>
+                  <div className="product-meta">
+                    <span>${item.price}</span>
+                    <span>{item.status}</span>
+                  </div>
+                </div>
               </div>
-              <p className="mt-3">{item.category}</p>
-              <h4>{item.title}</h4>
-              <h4>${item.price}</h4>
-              <h4>{item.status}</h4>
             </div>
           ))}
+          {filteredproduct.length === 0 && (
+            <div className="col-12">
+              <div className="collection-empty">
+                <h4>No products found</h4>
+                <p>Add products with this category, brand, or status from admin.</p>
+              </div>
+            </div>
+          )}
           {product && (
             <div className="custom-modal" onClick={() => setProduct(null)}>
               <div
@@ -155,7 +216,7 @@ const Collection = () => {
                       className="modal-desc"
                       style={{ marginTop: "15px", color: "#555" }}
                     >
-                     {product.description}
+                      {product.description}
                     </p>
 
                     <div className="product-action">
@@ -194,6 +255,62 @@ const Collection = () => {
           )}
         </div>
       </div>
+      <section className="customer-review-section">
+        <div className="container">
+          <div className="review-heading text-center">
+            <p>Customers Review</p>
+            <h2>What our Clients say</h2>
+          </div>
+
+          <div className="row g-4 justify-content-center">
+            {reviews.map((review) => (
+              <div className="col-lg-5 col-md-6" key={review.id}>
+                <div className="review-card">
+                  <div className="review-stars">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <i
+                        key={star}
+                        className={`fa-solid fa-star ${
+                          star <= review.rating ? "filled" : ""
+                        }`}
+                      ></i>
+                    ))}
+                  </div>
+                  <p className="review-text">
+                    Suscipit tellus mauris a diam maecenas. Ut faucibus pulvinar
+                    elementum integer enim neque volutpat ac. Auctor urna nunc id
+                    cursus. Scelerisque purus semper eget duis at.
+                  </p>
+                  <div className="review-author">
+                    <img src={review.image} alt={review.name} />
+                    <span>
+                      <strong>{review.name}</strong> /{review.role}
+                    </span>
+                  </div>
+                  <span className="quote-mark">"</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="review-dots">
+            <span className="active"></span>
+            <span></span>
+          </div>
+
+          <div className="service-strip">
+            {services.map((service) => (
+              <div className="service-item" key={service.id}>
+                <i className={service.icon}></i>
+                <div>
+                  <h5>{service.title}</h5>
+                  <p>{service.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

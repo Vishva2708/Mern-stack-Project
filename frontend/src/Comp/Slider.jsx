@@ -5,18 +5,43 @@ import { useNavigate } from "react-router";
 
 const Slider = () => {
   const [slider, setSlider] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     getslider();
+
+    const intervalId = setInterval(() => {
+      getslider(false);
+    }, 5000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
-  const getslider = async () => {
-    const res = await axios.get(`${API_URL}/slider`);
-    setSlider(res.data.sliders || []);
+  const getslider = async (showLoader = true) => {
+    try {
+      if (showLoader) {
+        setLoading(true);
+      }
+      const res = await axios.get(`${API_URL}/slider`);
+      setSlider(res.data.sliders || []);
+    } catch (error) {
+      console.error("Slider load failed", error);
+      setSlider([]);
+    } finally {
+      setLoading(false);
+    }
   };
-  const handlesubmit=async()=>{
-    navigate("/categories")
+  const handlesubmit = async () => {
+    navigate("/categories");
+  };
+
+  if (loading) {
+    return null;
+  }
+
+  if (!slider.length) {
+    return null;
   }
 
   return (
@@ -29,20 +54,25 @@ const Slider = () => {
         <div className="carousel-inner">
           {slider.map((item, index) => (
             <div
-              className={`carousel-item ${
-                index === 0 ? "active" : ""
-              }`}
+              className={`carousel-item ${index === 0 ? "active" : ""}`}
               key={item._id}
+              style={{
+                height: "calc(100vh - 80px)",
+                minHeight: "620px",
+                maxHeight: "760px",
+              }}
             >
               <img
                 src={item.image}
                 className="d-block w-100"
+                decoding="async"
+                fetchPriority={index === 0 ? "high" : "auto"}
                 style={{
-                  height: "720px",
+                  height: "100%",
                   objectFit: "cover",
-                  filter: "brightness(70%)",
+                  objectPosition: "center top",
                 }}
-                alt=""
+                alt={item.title || "Slider"}
               />
 
               <div
@@ -75,23 +105,6 @@ const Slider = () => {
                   {item.title}
                 </h1>
 
-                <div className="d-flex gap-4 mt-4 text-white">
-                  <div className="pe-3 border-end">
-                    <h5>High-end</h5>
-                    <p>Cosmetics</p>
-                  </div>
-
-                  <div className="pe-3 border-end">
-                    <h5>Vegan</h5>
-                    <p>Product</p>
-                  </div>
-
-                  <div>
-                    <h5>Express</h5>
-                    <p>Make-up</p>
-                  </div>
-                </div>
-
                 <button
                   className="btn btn-outline-light mt-4 px-4 py-3 rounded-0"
                   onClick={handlesubmit}
@@ -103,23 +116,27 @@ const Slider = () => {
           ))}
         </div>
 
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleControls"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon"></span>
-        </button>
+        {slider.length > 1 && (
+          <>
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="prev"
+            >
+              <span className="carousel-control-prev-icon"></span>
+            </button>
 
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleControls"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon"></span>
-        </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="next"
+            >
+              <span className="carousel-control-next-icon"></span>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
