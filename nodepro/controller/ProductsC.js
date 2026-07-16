@@ -6,7 +6,7 @@ const prod=async(req,res)=>{
 
     let image=""
     if(req.file){
-       image= req.file.path
+       image= req.file.filename
     }
     await productdata.create({
         title,category,price,image
@@ -32,7 +32,11 @@ const storage = multer.diskStorage({
 })
 const productapi=async(req,res)=>{
     const data=await productdata.find({})
-    res.json({msg:"product added"})
+    const formattedData = data.map((item) => ({
+        ...item.toObject(),
+        image: item.image ? String(item.image).replace(/\\/g, "/").split("/").pop() : "",
+    }))
+    res.json(formattedData)
 }
 const ImageUpload = multer({ storage }).single("image")
 

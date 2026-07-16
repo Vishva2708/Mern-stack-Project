@@ -8,4 +8,9 @@ const getslide=async(req,res)=>{
     const sliders=await Slider.find()
     res.json({success:true,sliders})
 }
-module.exports={addslide,getslide}
+const deleteslide=async(req,res)=>{
+    const {id}=req.params
+    await Slider.findByIdAndDelete(id)
+    res.json({message:"slider deleted",success:true})
+}
+module.exports={addslide,getslide,deleteslide}
