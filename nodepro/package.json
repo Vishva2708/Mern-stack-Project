@@ -4,7 +4,8 @@
   "main": "admin.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon admin.js"
+    "start": "nodemon admin.js",
+    "reset-admin": "node scripts/resetAdmin.js"
   },
   "keywords": [],
   "author": "",
