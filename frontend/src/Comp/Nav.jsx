@@ -56,6 +56,17 @@ const Nav = () => {
     localStorage.removeItem("userToken")
     navigate("/login");
   };
+
+  const requireLogin = () => {
+    if (user?._id) {
+      return true;
+    }
+
+    alert("Please login first");
+    navigate("/register");
+    return false;
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
       <div className="container">
@@ -270,7 +281,11 @@ const Nav = () => {
           </div>
           <div
             style={{ position: "relative", cursor: "pointer" }}
-            onClick={() => navigate("/wishlist")}
+            onClick={() => {
+              if (requireLogin()) {
+                navigate("/wishlist");
+              }
+            }}
           >
             <i className="fa-regular fa-heart fs-5"></i>
 
@@ -291,7 +306,11 @@ const Nav = () => {
           </div>
           <div
             style={{ position: "relative", cursor: "pointer" }}
-            onClick={() => setCartOpen(true)}
+            onClick={() => {
+              if (requireLogin()) {
+                setCartOpen(true);
+              }
+            }}
           >
             <i className="fa-solid fa-basket-shopping fs-5"></i>
 

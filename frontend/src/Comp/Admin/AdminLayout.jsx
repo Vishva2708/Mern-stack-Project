@@ -1,18 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Link, Routes, Route, Navigate, useNavigate } from "react-router-dom";
-
-import Dashboard from "./Dashboard";
-import Products from "./Products";
-import Categories from "./Categories";
-import Users from "./Users";
-import AdminOrders from "./AdminOrders";
-import AdminCoupon from "./AdminCoupon";
-import Brands from "./Brands";
-import AdminSlider from "./AdminSlider";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
+import "./css/Admin.css";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const admin = JSON.parse(localStorage.getItem("admin"));
   if (!admin) {
@@ -27,33 +20,40 @@ const AdminLayout = () => {
     navigate("/login");
   };
 
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   return (
-    <div className="d-flex">
-      <div
-        style={{
-          width: "250px",
-          minHeight: "100vh",
-          background: "linear-gradient(180deg,#4f46e5,#7c3aed)",
-          padding: "23px",
-          position: "fixed",
-        }}
+    <div className="admin-shell">
+      <button
+        type="button"
+        className="admin-menu-btn"
+        onClick={() => setSidebarOpen(true)}
+        aria-label="Open admin menu"
       >
-        <div className="text-center">
-          <div
-            style={{
-              width: "90px",
-              height: "90px",
-              borderRadius: "50%",
-              background: "#fff",
-              margin: "auto",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "40px",
-              fontWeight: "bold",
-              color: "#4f46e5",
-            }}
+        ☰
+      </button>
+
+      <div
+        className={`admin-overlay ${sidebarOpen ? "show" : ""}`}
+        onClick={closeSidebar}
+      />
+
+      <aside className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
+        <div className="admin-sidebar-top">
+          <button
+            type="button"
+            className="admin-close-btn"
+            onClick={closeSidebar}
+            aria-label="Close admin menu"
           >
+            ×
+          </button>
+        </div>
+
+        <div className="text-center">
+          <div className="admin-avatar">
             {admin?.username?.charAt(0).toUpperCase()}
           </div>
 
@@ -69,44 +69,44 @@ const AdminLayout = () => {
           }}
         >
           <li className="mb-3">
-            <Link to="/admin-dashboard" style={linkStyle}>
+            <Link to="/admin-dashboard" style={linkStyle} onClick={closeSidebar}>
               Dashboard
             </Link>
           </li>
 
           <li className="mb-3">
-            <Link to="/admin-dashboard/products" style={linkStyle}>
+            <Link to="/admin-dashboard/products" style={linkStyle} onClick={closeSidebar}>
               Products
             </Link>
           </li>
 
           <li className="mb-3">
-            <Link to="/admin-dashboard/coupon" style={linkStyle}>
+            <Link to="/admin-dashboard/coupon" style={linkStyle} onClick={closeSidebar}>
               Coupons
             </Link>
           </li>
 
           <li className="mb-3">
-            <Link to="/admin-dashboard/slider" style={linkStyle}>
+            <Link to="/admin-dashboard/slider" style={linkStyle} onClick={closeSidebar}>
               Slider
             </Link>
           </li>
 
           <li className="mb-3">
-            <Link to="/admin-dashboard/categories" style={linkStyle}>
+            <Link to="/admin-dashboard/categories" style={linkStyle} onClick={closeSidebar}>
               Categories
             </Link>
           </li>
 
           <li className="mb-3">
-            <Link to="/admin-dashboard/orders" style={linkStyle}>
+            <Link to="/admin-dashboard/orders" style={linkStyle} onClick={closeSidebar}>
               Orders
             </Link>
           </li>
           
 
           <li className="mb-3">
-            <Link to="/admin-dashboard/users" style={linkStyle}>
+            <Link to="/admin-dashboard/users" style={linkStyle} onClick={closeSidebar}>
               Users
             </Link>
           </li>
@@ -120,35 +120,11 @@ const AdminLayout = () => {
             </button>
           </li>
         </ul>
-      </div>
+      </aside>
 
-      <div
-        style={{
-          marginLeft: "250px",
-          width: "100%",
-          padding: "30px",
-          background: "#f4f7fe",
-          minHeight: "100vh",
-        }}
-      >
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-
-          <Route path="/products" element={<Products />} />
-
-          <Route path="/coupon" element={<AdminCoupon />} />
-
-          <Route path="/slider" element={<AdminSlider />} />
-
-          <Route path="/brands" element={<Brands />} />
-
-          <Route path="/categories" element={<Categories />} />
-
-          <Route path="/orders" element={<AdminOrders />} />
-
-          <Route path="/users" element={<Users />} />
-        </Routes>
-      </div>
+      <main className="admin-main">
+        <Outlet />
+      </main>
     </div>
   );
 };

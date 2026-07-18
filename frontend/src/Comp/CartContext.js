@@ -93,7 +93,7 @@ export const CartProvider = ({ children }) => {
 
       if (!currentUser?._id) {
         alert("Please login first");
-        return;
+        return false;
       }
 
       await axios.post(`${API_URL}/cart/add-cart`, {
@@ -114,8 +114,10 @@ export const CartProvider = ({ children }) => {
       setCartItems(formattedCart);
 
       alert("Product added to cart");
+      return true;
     } catch (error) {
       console.log("Add Cart Error:", error);
+      return false;
     }
   };
 
@@ -197,7 +199,7 @@ export const CartProvider = ({ children }) => {
 
       if (!currentUser?._id) {
         alert("Please login first");
-        return;
+        return false;
       }
 
       await axios.post(`${API_URL}/wishlist/add-wishlist`, {
@@ -217,8 +219,10 @@ export const CartProvider = ({ children }) => {
       setWishlistItems(formattedWishlist);
 
       alert("Product added to wishlist");
+      return true;
     } catch (error) {
       console.log("Add Wishlist Error:", error);
+      return false;
     }
   };
 

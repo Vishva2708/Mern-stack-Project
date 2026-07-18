@@ -1,5 +1,5 @@
 import { API_URL } from "../config";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router-dom";
 import "./css/Cart.css";
@@ -12,6 +12,15 @@ const Cart = () => {
   const [discountAmount, setDiscountAmount] = useState(0);
   const [discountpercent, setDiscountpercent] = useState(0);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user?._id) {
+      alert("Please login first");
+      navigate("/register");
+    }
+  }, [navigate]);
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * (item.qty || 1),

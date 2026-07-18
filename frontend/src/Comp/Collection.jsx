@@ -82,6 +82,33 @@ const Collection = () => {
     },
   ];
 
+  const handleAddToCart = async (item, redirectToCart = false) => {
+    const added = await addToCart(item);
+
+    if (!added) {
+      navigate("/register");
+      return;
+    }
+
+    if (redirectToCart) {
+      navigate("/cart");
+      return;
+    }
+
+    setCartOpen(true);
+  };
+
+  const handleAddToWishlist = async (item) => {
+    const added = await addToWishlist(item);
+
+    if (!added) {
+      navigate("/register");
+      return;
+    }
+
+    navigate("/wishlist");
+  };
+
   return (
     <div className=" container collection-container">
       <div className="top-bar">
@@ -118,10 +145,7 @@ const Collection = () => {
                     <div className="icon-box">
                       <i
                         className="fa fa-shopping-cart"
-                        onClick={() => {
-                          addToCart(item);
-                          setCartOpen(true);
-                        }}
+                        onClick={() => handleAddToCart(item)}
                         style={{ cursor: "pointer" }}
                       ></i>
                     </div>
@@ -135,19 +159,13 @@ const Collection = () => {
                       <i
                         className="fa-regular fa-heart fs-5"
                         style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          addToWishlist(item);
-                          navigate("/wishlist");
-                        }}
+                        onClick={() => handleAddToWishlist(item)}
                       ></i>
                     </div>
                   </div>
                   <button
                     className="add-cart-btn"
-                    onClick={() => {
-                      addToCart(item);
-                      setCartOpen(true);
-                    }}
+                    onClick={() => handleAddToCart(item)}
                   >
                     Add To Cart
                   </button>
@@ -233,17 +251,23 @@ const Collection = () => {
 
                         <button
                           className="modal-add-cart-btn"
-                          onClick={() => {
-                            addToCart(product);
-                            navigate("/cart");
-                          }}
+                          onClick={() => handleAddToCart(product, true)}
                         >
                           Add To Cart
                         </button>
                       </div>
                       <button
                         className="modal-buy-now"
-                        onClick={() => navigate("/checkout")}
+                        onClick={async () => {
+                          const added = await addToCart(product);
+
+                          if (!added) {
+                            navigate("/register");
+                            return;
+                          }
+
+                          navigate("/checkout");
+                        }}
                       >
                         Buy Now
                       </button>

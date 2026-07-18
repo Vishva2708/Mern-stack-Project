@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Nav from "./Comp/Nav";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Register from "./Comp/Register";
 import Login from "./Comp/Login";
 import Home from "./Comp/Home";
@@ -29,28 +29,119 @@ import AdminSlider from "./Comp/Admin/AdminSlider";
 import Category from "./Comp/Category";
 import Coupon from "./Comp/Coupon";
 
+const getLoggedInUser = () => {
+  try {
+    return JSON.parse(localStorage.getItem("user"));
+  } catch (error) {
+    return null;
+  }
+};
+
+const ProtectedRoute = ({ children }) => {
+  const user = getLoggedInUser();
+
+  if (!user?._id) {
+    return <Navigate to="/register" replace />;
+  }
+
+  return children;
+};
+
 const App = () => {
   const [showCart, setShowCart] = useState(false);
+  const location = useLocation();
 
-  const isAdminRoute = window.location.pathname.startsWith("/admin");
+  const isAdminRoute = location.pathname.startsWith("/admin-dashboard");
+  const isAuthRoute = ["/login", "/register"].includes(location.pathname);
+  const hideSiteFooter = isAdminRoute || isAuthRoute;
   return (
     <div>
       <CartProvider>
         {!isAdminRoute && <Nav />}
         {/* <Nav/> */}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/collection" element={<Collection />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/product/:id" element={<Productinfo />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/invoice" element={<Invoice />} />
-          <Route path="/categories" element={<Category />} />
-          <Route path="/coupon" element={<Coupon />} />
+          <Route
+            path="/collection"
+            element={
+              <ProtectedRoute>
+                <Collection />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <ProtectedRoute>
+                <Contact />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <ProtectedRoute>
+                <Productinfo />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <Wishlist />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invoice"
+            element={
+              <ProtectedRoute>
+                <Invoice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/categories"
+            element={
+              <ProtectedRoute>
+                <Category />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/coupon"
+            element={
+              <ProtectedRoute>
+                <Coupon />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/admin-dashboard/*"
@@ -76,10 +167,11 @@ const App = () => {
             
             <Route path="slider" element={<AdminSlider />} />
           </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
           {/* <Route path="/admin-dashboard/slider" element={<AdminSlider />} /> */}
         </Routes>
         <Cartslide showCart={showCart} setShowCart={setShowCart} />
-        {!isAdminRoute && <Footer />}
+        {!hideSiteFooter && <Footer />}
         {/* <Footer /> */}
       </CartProvider>
     </div>

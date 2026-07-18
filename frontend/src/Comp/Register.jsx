@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [form, setForm] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const addtext = (e) => {
@@ -27,9 +28,9 @@ const Register = () => {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h3 className="text-center mb-3">Sign Up</h3>
+        <h3 className="auth-title">Sign Up</h3>
 
-        <p className="text-center">
+        <p className="auth-switch">
           Already have account? <Link to="/login">Login</Link>
         </p>
 
@@ -52,16 +53,31 @@ const Register = () => {
             required
           />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="form-control mb-3"
-            onChange={addtext}
-            required
-          />
+          <div className="input-group mb-3 password-field">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              className="form-control"
+              onChange={addtext}
+              required
+            />
 
-          <button className="btn btn-dark w-100">Register</button>
+            <button
+              type="button"
+              className="btn password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              <i
+                className={`fa-regular ${
+                  showPassword ? "fa-eye-slash" : "fa-eye"
+                }`}
+              ></i>
+            </button>
+          </div>
+
+          <button className="btn btn-dark w-100 auth-submit">Register</button>
         </form>
       </div>
     </div>

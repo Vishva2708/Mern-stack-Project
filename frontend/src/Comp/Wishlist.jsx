@@ -1,5 +1,5 @@
 import { API_URL } from "../config";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "./CartContext";
 import "./css/Wishlist.css";
@@ -12,6 +12,15 @@ const Wishlist = () => {
     removewishlist,
     addToCart,
   } = useContext(CartContext);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user?._id) {
+      alert("Please login first");
+      navigate("/register");
+    }
+  }, [navigate]);
 
   return (
     <div className="wishlist-container container mt-5 pt-5">

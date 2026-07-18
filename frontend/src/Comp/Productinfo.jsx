@@ -19,6 +19,18 @@ const Productinfo = () => {
   if (!product) {
     return <h2>Loading...</h2>;
   }
+
+  const handleAddToCart = async () => {
+    const added = await addToCart(product);
+
+    if (!added) {
+      navigate("/register");
+      return;
+    }
+
+    navigate("/cart");
+  };
+
   return (
     <div className="container mt-5 p-3 product-info-page">
       <h2 className="product-title">Product Info</h2>
@@ -63,10 +75,7 @@ const Productinfo = () => {
 
               <button
                 className="modal-add-cart-btn"
-                onClick={() => {
-                  addToCart(product)
-                  navigate("/cart");
-                }}
+                onClick={handleAddToCart}
               >
                 Add To Cart
               </button>
@@ -74,10 +83,7 @@ const Productinfo = () => {
 
             <button
               className="modal-buy-now"
-              onClick={() => {
-                addToCart(product)
-                navigate("/cart");
-              }}
+              onClick={handleAddToCart}
             >
               Buy Now
             </button>

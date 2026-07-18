@@ -218,10 +218,16 @@ const Category = () => {
                         </h5>
 
                         <button
-                         onClick={()=>{
-                          addToCart(itm)
-                          navigate("/cart")
-                         }}
+                          onClick={async () => {
+                            const added = await addToCart(itm);
+
+                            if (!added) {
+                              navigate("/register");
+                              return;
+                            }
+
+                            navigate("/cart");
+                          }}
                           className="btn btn-dark"
                           style={{
                             borderRadius: "10px",

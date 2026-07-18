@@ -2,6 +2,7 @@ import { API_URL } from "../config";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import "./css/Slider.css";
 
 const Slider = () => {
   const [slider, setSlider] = useState([]);
@@ -54,54 +55,25 @@ const Slider = () => {
         <div className="carousel-inner">
           {slider.map((item, index) => (
             <div
-              className={`carousel-item ${index === 0 ? "active" : ""}`}
+              className={`carousel-item hero-slide ${index === 0 ? "active" : ""}`}
               key={item._id}
-              style={{
-                height: "calc(100vh - 80px)",
-                minHeight: "620px",
-                maxHeight: "760px",
-              }}
             >
               <img
                 src={item.image}
-                className="d-block w-100"
+                className="d-block w-100 hero-slide-img"
                 decoding="async"
                 fetchPriority={index === 0 ? "high" : "auto"}
-                style={{
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                }}
                 alt={item.title || "Slider"}
               />
 
               <div
-                className="carousel-caption d-flex flex-column justify-content-center align-items-start text-start"
-                style={{
-                  top: "0",
-                  bottom: "0",
-                  left: "10%",
-                  right: "auto",
-                  width: "45%",
-                }}
+                className="carousel-caption hero-caption d-flex flex-column justify-content-center align-items-start text-start"
               >
-                <h3
-                  style={{
-                    fontFamily: "cursive",
-                    fontSize: "40px",
-                    color: "#fff",
-                  }}
-                >
+                <h3 className="hero-subtitle">
                   {item.subtitle}
                 </h3>
 
-                <h1
-                  className="fw-light text-white"
-                  style={{
-                    fontSize: "90px",
-                    lineHeight: "1",
-                  }}
-                >
+                <h1 className="hero-title">
                   {item.title}
                 </h1>
 
